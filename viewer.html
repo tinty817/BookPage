@@ -90,19 +90,21 @@
 
         /* 左右箭頭按鈕 */
         .arrow-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 8px; /* 调整按钮的内边距 */
-            font-size: 20px; /* 调整按钮图标的大小 */
-            background-color: #3a7ce6;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            z-index: 10;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 10px;
+        font-size: 24px;
+        background-color: #3a7ce6;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        z-index: 1000; /* 提高 z-index 值，确保按钮在绘本页面之上 */
+        pointer-events: auto; /* 确保按钮可以接收点击事件 */
         }
+
 
      @media (max-width: 768px) {
     /* 针对屏幕宽度小于768px的设备 */
@@ -248,6 +250,8 @@
 
         .page {
          position: relative;
+         z-index: 1; /* 确保页面的 z-index 比按钮低 */
+
         }
         #flipbook.first-page .page-left {
         display: none;
