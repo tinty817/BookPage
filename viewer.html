@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>繪本閱讀</title>
     <div style="text-align: center; margin: 20px;">
         <button id="back-to-home" style="padding: 10px 20px; font-size: 16px;">返回首頁
@@ -93,8 +93,8 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            padding: 10px;
-            font-size: 24px;
+            padding: 8px; /* 调整按钮的内边距 */
+            font-size: 20px; /* 调整按钮图标的大小 */
             background-color: #3a7ce6;
             color: white;
             border: none;
@@ -104,6 +104,44 @@
             z-index: 10;
         }
 
+     @media (max-width: 768px) {
+    /* 针对屏幕宽度小于768px的设备 */
+    .arrow-button {
+        top: 90%; /* 调整按钮的垂直位置 */
+        transform: translateY(-50%);
+    }
+
+    #pdf-prev {
+        left: 10px; /* 调整左按钮的水平位置 */
+    }
+
+    #pdf-next {
+        right: 10px; /* 调整右按钮的水平位置 */
+    }
+
+    /* 调整DIVE容器的位置 */
+    #dive-container {
+        align-items: center; /* 居中对齐 */
+        padding-top: 0; /* 去除顶部内边距 */
+    }
+
+    #dive-frame {
+        width: 95%; /* 在移动设备上占据更大宽度 */
+        height: auto;
+        max-height: 90%; /* 提高最大高度 */
+    }
+    
+        #flipbook {
+        width: 100%; /* 使用百分比宽度 */
+        height: auto; /* 自动调整高度 */
+    }
+    
+    /* 确保其他元素的宽度也适应屏幕 */
+    .arrow-button {
+        font-size: 20px;
+    }
+
+}
         .arrow-button:hover {
             background-color: #2958a3;
         }
@@ -138,8 +176,8 @@
 }
 
 
-        /* DIVE 容器樣式 */
-        #dive-container {
+ /* DIVE 容器樣式 */
+    #dive-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -173,7 +211,7 @@
             max-width: 1000px;
             max-height: 80%;
             border: 2px solid #333;
-            aspect-ratio: 16/9;
+            aspect-ratio: 4/3;
         }
 
         #dive-buttons {
