@@ -98,27 +98,40 @@
         background-color: #3a7ce6;
         color: white;
         border: none;
-        border-radius: 50%;
+        border-radius: 50%; 
         cursor: pointer;
         transition: background-color 0.3s ease;
-        z-index: 1000; /* 提高 z-index 值，确保按钮在绘本页面之上 */
-        pointer-events: auto; /* 确保按钮可以接收点击事件 */
+        z-index: 1000; /* 确保按钮在页面内容之上 */
+        width: 50px; 
+        height: 50px; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
         }
+
+    #pdf-prev {
+    left: -40px; /* 初始位置可以设为负值，等到 JavaScript 调整 */
+    }
+
+    #pdf-next {
+    right: -50px; /* 初始位置可以设为负值，等到 JavaScript 调整 */
+    }
 
 
      @media (max-width: 768px) {
     /* 针对屏幕宽度小于768px的设备 */
     .arrow-button {
-        top: 90%; /* 调整按钮的垂直位置 */
-        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        font-size: 18px;
     }
-
     #pdf-prev {
-        left: 10px; /* 调整左按钮的水平位置 */
+        left: 10px !important; /* 在小屏幕设备上调整到视窗内 */
     }
 
     #pdf-next {
-        right: 10px; /* 调整右按钮的水平位置 */
+        right: 10px !important; /* 确保右侧按钮也在视窗内 */
     }
 
     /* 调整DIVE容器的位置 */
@@ -134,7 +147,7 @@
     }
     
         #flipbook {
-        width: 100%; /* 使用百分比宽度 */
+        width: 80%; /* 使用百分比宽度 */
         height: auto; /* 自动调整高度 */
     }
     
@@ -143,20 +156,13 @@
         font-size: 20px;
     }
 
-}
+    }
         .arrow-button:hover {
             background-color: #2958a3;
         }
 
-        #pdf-prev {
-            left: 20px;
-        }
-
-        #pdf-next {
-            right: 20px;
-        }
-
-        /* 進度條樣式 */.progress-bar {
+        /* 進度條樣式 */
+    .progress-bar {
     width: 80%;
     margin: 20px auto;
     text-align: center;
@@ -661,6 +667,31 @@ $(document).ready(function() {
 
 });
 
+const prevButton = $('#pdf-prev');
+    const nextButton = $('#pdf-next');
+    const flipbook = $('#flipbook');
+
+    // 初始设置按钮位置
+    setArrowButtonPosition();
+
+    // 当窗口调整大小时重新设置按钮位置
+    $(window).resize(setArrowButtonPosition);
+
+    function setArrowButtonPosition() {
+        const flipbookOffset = flipbook.offset();
+        const flipbookWidth = flipbook.outerWidth();
+        const buttonOffset = 20; // 控制按钮离书页的距离
+
+        prevButton.css({
+            top: flipbookOffset.top + flipbook.outerHeight() / 2 - prevButton.outerHeight() / 2 + 'px',
+            left: flipbookOffset.left - prevButton.outerWidth() - buttonOffset + 'px' // 使按钮位于翻页区域的左侧
+        });
+
+        nextButton.css({
+            top: flipbookOffset.top + flipbook.outerHeight() / 2 - nextButton.outerHeight() / 2 + 'px',
+            left: flipbookOffset.left + flipbookWidth + 'px' // 使按钮位于翻页区域的右侧
+        });
+    }
 
         document.getElementById('pdf-prev').addEventListener('click', function() {
             $('#flipbook').turn('previous');  // 执行翻到上一页的操作
@@ -829,7 +860,28 @@ function renderPDFPage(page_num) {
     });
 }
 console.log('DiveLinker:', DiveLinker);
+function adjustArrowButtons() {
+    const flipbook = $('#flipbook');
+    const flipbookOffset = flipbook.offset();
+    const flipbookWidth = flipbook.width();
+    const flipbookHeight = flipbook.height();
 
+    // 计算箭头的位置
+    const prevButton = $('#pdf-prev');
+    const nextButton = $('#pdf-next');
+    setArrowButtonPosition();
+
+}
+
+// 在页面加载完成后和窗口大小调整时调整按钮位置
+$(document).ready(function () {
+    adjustArrowButtons();
+    $(window).resize(adjustArrowButtons);
+
+    $('#flipbook').bind('turning', function(event, page, view) {
+        adjustArrowButtons(); // 页面翻动时调整箭头位置
+    });
+});
 
     </script>
 </body>
