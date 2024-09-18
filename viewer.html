@@ -641,8 +641,8 @@ $(document).ready(function() {
 });
 
 const prevButton = $('#pdf-prev');
-    const nextButton = $('#pdf-next');
-    const flipbook = $('#flipbook');
+const nextButton = $('#pdf-next');
+const flipbook = $('#flipbook');
 
     // 初始设置按钮位置
     setArrowButtonPosition();
@@ -668,6 +668,8 @@ const prevButton = $('#pdf-prev');
 
         document.getElementById('pdf-prev').addEventListener('click', function() {
             $('#flipbook').turn('previous');  // 执行翻到上一页的操作
+            adjustLinkRegions();
+
     
     // 获取当前页码并手动减 1
     let currentPageElement = document.getElementById('pdf-current-page');
@@ -680,6 +682,8 @@ const prevButton = $('#pdf-prev');
 
         document.getElementById('pdf-next').addEventListener('click', function() {
             $('#flipbook').turn('next');
+            adjustLinkRegions();
+
         });
 
 
