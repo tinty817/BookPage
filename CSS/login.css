@@ -66,3 +66,31 @@ button:hover {
 .forgot-password a:hover {
     text-decoration: underline;
 }
+
+
+
+.top-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000; /* 確保按鈕在視窗的最上層 */
+}
+
+.home-button {
+    width: 80%;
+
+    background-color: #4ba6fb;
+    color: white;
+    padding: 10px 20px; /* 增加按鈕的內間距 */
+    text-decoration: none;
+    border-radius: 8px; /* 圓角邊框 */
+    font-size: 16px; /* 字體大小 */
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影 */
+    transition: background-color 0.3s ease; /* 平滑的背景變化效果 */
+    display: inline-block; /* 讓按鈕保持 inline 格式 */
+}
+
+.home-button:hover {
+    background-color: #003db6; /* 滑鼠懸停時的背景顏色 */
+}
