@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學習診斷</title>
+    <link rel="stylesheet" href="CSS/sorce.css">
+</head>
+<body>
+    <button id="back-button" class="back-button">返回</button>
+    <div class="hero-section">
+        <h1>學習診斷</h1>
+    </div>
+
+    <!-- 運算思維掌握度 -->
+    <div class="label">運算思維掌握度</div>
+    <div class="progress-container">
+        <div id="computationProgress" class="progress-bar">0%</div>
+    </div>
+
+    <!-- 音樂思維掌握度 -->
+    <div class="label">音樂思維掌握度</div>
+    <div class="progress-container">
+        <div id="musicProgress" class="progress-bar">0%</div>
+    </div>
+
+    <!-- 整體評價 -->
+    <div class="label">整體評價</div>
+    <div class="progress-container">
+        <div id="overallProgress" class="progress-bar">0%</div>
+    </div>
+
+    <script>
+        // 從 sessionStorage 中取得評分
+        let computationScore = parseFloat(sessionStorage.getItem('computationScore')) || 0;
+let musicScore = parseFloat(sessionStorage.getItem('musicScore')) || 0;
+let overallScore = parseFloat(sessionStorage.getItem('overallScore')) || 0;
+        console.log("從 sessionStorage 讀取的分數:");
+console.log("computationScore:", computationScore);
+console.log("musicScore:", musicScore);
+console.log("overallScore:", overallScore);
+
+
+        // 設定運算思維進度條
+        document.getElementById('computationProgress').style.width = computationScore + '%';
+        document.getElementById('computationProgress').textContent = computationScore + '%';
+
+        // 設定音樂思維進度條
+        document.getElementById('musicProgress').style.width = musicScore + '%';
+        document.getElementById('musicProgress').textContent = musicScore + '%';
+
+        // 設定整體評價進度條
+        document.getElementById('overallProgress').style.width = overallScore + '%';
+        document.getElementById('overallProgress').textContent = overallScore + '%';
+
+        // 返回按鈕邏輯，返回到之前閱讀的書本
+        document.getElementById('back-button').addEventListener('click', function() {
+            const currentBook = sessionStorage.getItem('currentBook'); // 從 sessionStorage 取得目前閱讀的書本
+            if (currentBook) {
+                window.location.href = `viewer.html?book=${currentBook}`; // 返回到相應的書本
+            } else {
+                window.history.back(); // 如果沒有存儲書本資訊，則回到上一頁
+            }
+        });
+
+        
+    </script>
+</body>
+</html>
