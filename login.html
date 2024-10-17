@@ -5,21 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登入畫面</title>
     <link rel="stylesheet" href="CSS\login.css">
- 
 </head>
 <body>
 
     <div class="login-container">
         <h2>登入</h2>
-        <form action="index.html" method="GET">
-            <input type="text" name="username" placeholder="帳號" required>
-            <input type="password" placeholder="密碼" required>
-            <button type="submit">登入</button>
+        <form action="index.html" method="GET" onsubmit="return login(event)">
+            <input id="sa" type="text" name="username" placeholder="帳號" required>
+            <input id="sp" type="password" placeholder="密碼" required>
+            <button type="submit" class="submit">登入</button>
         </form>
-        <!-- <div class="forgot-password">
-            <a href="#">忘記密碼？</a>
-        </div> -->
     </div>
 
 </body>
+
+<script>
+var emailArray = ['test123'];  
+var passwordArray = ['123'];
+
+function login(event) {
+    event.preventDefault();
+    
+    var account = document.getElementById("sa").value;
+    var password = document.getElementById("sp").value;
+
+    // 在 emailArray 中找帳號是否存在，並將索引值儲存到 i
+    var i = emailArray.indexOf(account);
+
+    // 帳號不存在或未註冊
+    if (i === -1) {
+        alert("帳號不存在或未註冊，請重新嘗試。");
+        return false;  
+    }
+    
+    // 檢查密碼 (空白或錯誤)
+    if (passwordArray[i] !== password) {
+        alert("密碼錯誤，請重新嘗試。");
+        return false;  
+    }
+
+    // 帳號和密碼正確，允許表單提交到首頁
+    alert(account + "，您已成功登入！");
+    window.location.href = "index.html?username=" + encodeURIComponent(account); // 跳轉到首頁並帶上使用者名稱
+    return true;
+}
+</script>
 </html>
